@@ -90,6 +90,29 @@ Grave tudo em `test/cases/<feature>/LACUNAS.md`, com data e responsável pela re
 em duas seções: **Abertas** e **Respondidas**. Cada lacuna leva `L-XX`, a pergunta e o
 **impacto se não for respondida**.
 
+### Ache as lacunas por técnica, não por intuição
+
+Ler o requisito e "sentir" o que falta deixa buraco. Antes de fechar a lista, passe por
+estas três checagens:
+
+1. **Tabela de decisão, quando a regra combina condições.** Monte a tabela (condições ×
+   ações) e faça o **teste de completude por contagem**: com *n* condições binárias
+   existem 2ⁿ combinações. Combinação sem ação definida vira lacuna; duas colunas com as
+   mesmas condições e ações diferentes são **regras inconsistentes** e viram lacuna
+   **bloqueante**.
+2. **Regras "nunca/sempre" do módulo.** Proponha ao QA uma lista curta de invariantes
+   que o documento sugere mas não escreve — ex.: *"o saldo do endereço nunca fica
+   negativo"*, *"todo volume expedido tem nota vinculada"*. Cada uma vira lacuna para o
+   PO confirmar. Confirmada, entra em `REGRAS.md` como RN com origem na lacuna — e
+   violá-la passa a ser defeito com regra nomeada.
+3. **Pergunta-padrão de estoque.** Toda RN que mexe em saldo pergunta: **em que evento
+   mudam o físico, o reservado e o disponível?** A maior parte dos defeitos de saldo nasce
+   quando a vida física e a vida no sistema andam em tempos diferentes.
+
+📖 Se o projeto tiver a base de conhecimento: `conhecimento/tecnicas/tabela-de-decisao.md`,
+`exploracao-de-requisitos-e-estados.md` e `conhecimento/dominio/`. Domínio gera
+**pergunta**, nunca regra: quem decide é o PO.
+
 O que ficar sem resposta vira caso `bloqueado` na execução — **nunca** comportamento
 chutado. Cenário que dependa de lacuna aberta leva `@premissa` e fica fora da suíte
 oficial.

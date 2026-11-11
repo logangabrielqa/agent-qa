@@ -65,11 +65,11 @@ Você não perde seu trabalho: o `checkout` traz **só** as pastas da ferramenta
 
 ```bash
 git fetch kit --tags
-git checkout kit/v1.3.0 -- \
+git checkout kit/v1.4.0 -- \
   .claude/skills .claude/hooks .claude/settings.json .claude/prompts \
   test/scripts docs templates .github CLAUDE.md .mcp.json
-echo "1.3.0" > VERSION
-git commit -am "chore: atualiza kit de v1.2.0 para v1.3.0"
+echo "1.4.0" > VERSION
+git commit -am "chore: atualiza kit de v1.3.0 para v1.4.0"
 ```
 
 `test/cases/`, `test/runs/`, `test/sessoes/`, `test/metricas/`, `test/releases/` e

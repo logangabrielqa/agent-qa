@@ -15,6 +15,31 @@ Quando incrementar:
 
 ---
 
+## [1.4.0] — 2026-11-11
+
+Método dentro de cada etapa, a partir do estudo "Performance do agente de QA" (livros
+do time e fontes de 2025–2026). **Nada invalida artefato existente** e o lint não muda:
+são instruções novas nas skills.
+
+### Adicionado
+
+- **`qa-execucao` — veredito com critério (2.2).** Cada verificação registra regra →
+  como observou → esperado → veredito; "tela sem erro" não é veredito; o dado é seguido
+  até onde é consumido (saldo, etiqueta, integração).
+- **`qa-intake` — lacunas por técnica.** Teste de completude da tabela de decisão,
+  lista curta de regras "nunca/sempre" para o PO confirmar e a pergunta-padrão de
+  estoque (físico, reservado, disponível).
+- **`design-casos-teste` — conferência do conjunto.** Tabela estado × evento e
+  cobertura das colunas da tabela de decisão antes do portão 2.
+- **`qa-defeito` — investigar antes de relatar.** Consequência mais grave, faixa
+  afetada, passos mínimos, contorno; um defeito por relato; reprodução "n de m";
+  hipótese técnica rotulada; reteste em três frentes.
+- **`qa-automacao` — regras de reparo.** Spec quebrada só tem locator, espera e massa
+  ajustados (nunca `expect`), no máximo 3 tentativas e aceite só com
+  `--repeat-each=5`; `test.fixme` só com rascunho de defeito.
+
+---
+
 ## [1.3.0] — 2026-07-28
 
 Estende a verificação até o **código do teste**. Até aqui os guarda-corpos

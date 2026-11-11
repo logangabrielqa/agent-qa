@@ -243,6 +243,23 @@ aberta está `@nao-aprovado` no `.feature` — nesse, `.skip` é aceito, porque 
 relatório já o conta como não coberto. Desligar a spec de um caso **aprovado**
 é o que o lint impede: ele some do relatório como se estivesse coberto.
 
+## Reparo de spec quebrada — as regras do nosso "healer"
+
+O *healer* oficial do Playwright corrige valores esperados para o teste passar, sem
+perguntar. Aqui isso é proibido. Quando uma spec que já foi aprovada quebra:
+
+1. **Diagnostique primeiro** com a tabela acima. Se for o sistema, é bug: pare.
+2. **Mexa só em locator, espera e dado de massa.** Nunca em `expect`, nem no valor
+   esperado. Se o reparo exigir tocar num `expect`, **pare e pergunte ao QA**.
+3. **No máximo 3 tentativas.** Na terceira sem sucesso, apresente o diagnóstico ao QA.
+4. **Reparo só vale depois de `--repeat-each=5` verde**
+   (`npx playwright test <spec> --repeat-each=5`). Passou 4 de 5 é instável, não
+   consertado: vai para `@quarentena`, com prazo.
+5. **`test.fixme` só com rascunho de defeito vinculado** (`bugs/ct-XXX-*.json`) e com o
+   aval do QA.
+
+Ao apresentar o reparo, mostre o diff e a saída das 5 repetições.
+
 ## A forma esperada
 
 ```ts
@@ -351,4 +368,5 @@ a mesma armadilha do critério de aceite sem número.
 - Commitar sonda (`_probe*`) ou arquivo de depuração
 - Entregar spec sem ter rodado
 - Afrouxar assertion para virar verde
+- Consertar spec quebrada mexendo em `expect` ou no valor esperado
 - Escrever a suíte inteira antes de submeter o primeiro teste à aprovação

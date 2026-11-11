@@ -82,6 +82,26 @@ regra, não o defeito.
 
 ---
 
+### Confira o conjunto, não só cada cenário
+
+Cenários certos um a um podem formar, juntos, uma regra contraditória. Antes do
+portão, faça as duas conferências que valem para a feature:
+
+- **Estado × evento.** Se a regra tem status ou ciclo de vida, junte os cenários numa
+  tabela (linhas = estados, colunas = eventos, célula = estado seguinte e `CT`). Célula
+  vazia é transição não especificada → **lacuna**. Duas células que levam o mesmo par
+  estado/evento a destinos diferentes → **lacuna bloqueante**.
+- **Tabela de decisão.** Se a regra combina condições, monte a tabela (condições ×
+  ações) e confira se cada coluna tem cenário. Coluna sem cenário entra na matriz como **não coberta**, com o
+  motivo.
+
+Mostre as tabelas ao QA junto com os cenários e grave-as no fim da `MATRIZ.md`.
+
+📖 Se o projeto tiver a base de conhecimento: `conhecimento/tecnicas/teste-de-estados.md`
+e `tabela-de-decisao.md`.
+
+---
+
 ## 4. Monte a `MATRIZ.md`
 
 Uma linha por regra e uma por caso, com o cabeçalho de lint no topo:

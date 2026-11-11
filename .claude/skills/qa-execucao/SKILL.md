@@ -48,6 +48,29 @@ requisição voltou 500? Teste de UI puro não pega isso.
 re-renderizar e você registra falha que não existe. Diante de falha inesperada,
 **refaça pela interface antes de reportar**.
 
+## 2.2 Veredito com critério — vale para tudo que você observar
+
+Navegar sem critério e concluir "passou" é o erro mais comum de agente e de testador
+iniciante. **"A tela não deu erro" não é veredito.** Cada verificação registra quatro
+coisas, nesta ordem:
+
+| | |
+|---|---|
+| **Regra** | a `RN-XX` (ou o contrato) que diz o que é certo |
+| **Como observou** | onde olhou: tela, requisição (`browser_network_requests`), relatório, consulta permitida |
+| **Esperado** | o valor da regra, calculado à mão — nunca copiado da tela |
+| **Veredito** | `passou`, `falhou` ou `não deu para concluir` (com o motivo) |
+
+**Siga o dado até onde ele é consumido**, não só até ver que foi salvo. Uma entrada de
+estoque não termina na mensagem "gravado com sucesso": termina no saldo do endereço,
+na etiqueta, na integração. Se o caminho até lá estiver fora do seu alcance, diga isso
+no veredito — não presuma.
+
+Sem regra para comparar, não há veredito: o que pareceu estranho vira **pergunta**
+(`LACUNAS.md`) ou **sugestão de melhoria**, nunca `falhou`.
+
+📖 Se o projeto tiver a base de conhecimento: `conhecimento/tecnicas/heuristicas-de-oraculo.md`.
+
 ## 3. Pergunte os `@manual`
 
 Liste os casos e pergunte como foi. **Aceite resposta em lote** — *"1, 2 e 4
@@ -70,7 +93,7 @@ Se ninguém executou, é `nao_executado` — **nunca** `passou` presumido.
   "executado_por": "ci",
   "bug": 3502,
   "evidencia": "test/image/21-07-2026/ct-005.png",
-  "obs": "observado X, esperado Y"
+  "obs": "RN-04 · na tela de saldo: observado 8, esperado 10 (12 − 2 reservados)"
 }
 ```
 
@@ -92,7 +115,8 @@ Quando o QA quiser explorar: **ele dirige, você é as mãos e o caderno.**
 
 1. **Não navegue por conta própria.** Sugira o próximo passo, mas pergunte antes.
 2. **Relate o que observou, não o que concluiu.** "A tela mostrou X e a requisição
-   voltou Y" — o julgamento é dele.
+   voltou Y" — o julgamento é dele. Quando houver regra, use o formato da seção 2.2
+   (regra → como observou → esperado → veredito).
 3. **Capture evidência** a cada passo relevante.
 4. **Registre a sessão** em `test/sessoes/AAAA-MM-DD-<tema>.md`, com
    `executado_por: "agente"` — nunca em `test/runs/`.

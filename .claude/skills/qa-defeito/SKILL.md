@@ -24,6 +24,24 @@ E antes de abrir, confirme:
   certa. Escape duas vezes pela mesma regra é falha de desenho, não de execução.
 - **Defeito S1 interrompe o ciclo.** Parecer de release com S1 aberto não existe.
 
+## 0.1 Investigue antes de relatar (~5 minutos)
+
+Defeito relatado no primeiro sintoma volta do dev. Antes do rascunho, procure:
+
+1. **A consequência mais grave.** Pare de ver o sintoma e siga o dado: o erro na tela
+   também deixou o saldo errado? Gerou nota? Chegou à integração?
+2. **A faixa afetada.** Só aquele valor, ou toda a partição? Só aquele perfil?
+3. **Os passos mínimos.** Tire tudo que não é necessário para reproduzir.
+4. **Um caminho alternativo.** Existe contorno? Isso ajuda a decidir a severidade.
+
+**Um defeito por relato.** Dois comportamentos errados viram dois rascunhos.
+
+Registre a reprodução sempre como **sim**, **às vezes (n de m tentativas)** ou **não**.
+Hipótese sobre a causa ("parece que o reservado não é baixado") pode entrar, mas
+**num parágrafo separado e rotulado** — nunca misturada com o comportamento observado.
+
+📖 Se o projeto tiver a base de conhecimento: `conhecimento/tecnicas/relato-de-defeito.md`.
+
 ## 1. Monte o rascunho
 
 Preencha a partir do caso de teste, da execução e da conversa. Grave em
@@ -46,6 +64,13 @@ Preencha a partir do caso de teste, da execução e da conversa. Grave em
   "project_id": 9,
   "assigned_to": 12
 }
+```
+
+Na `descricao`, feche com duas linhas fixas — o `rise_bug.py` leva o texto como está:
+
+```
+Reprodução: às vezes (3 de 5 tentativas)
+Hipótese técnica (não confirmada): ...
 ```
 
 Passos ruins são o motivo nº 1 de bug devolvido pelo dev. Escreva de forma que
@@ -127,6 +152,17 @@ relatório não consegue dizer qual defeito reprovou qual caso.
 
 Se `contexto.json` tiver `cadastrar_bug_no_ap: false`, **não cadastre** — deixe o
 rascunho em `bugs/` e avise.
+
+## 3.1 Reteste (card em Homolog) — três frentes
+
+Quando o dev devolve a correção, o reteste não é só refazer os passos:
+
+1. **O caso:** os passos do relato, com a mesma massa e com uma massa nova.
+2. **A vizinhança:** os valores ao lado (limites, outra partição, outro perfil).
+3. **Os efeitos colaterais:** o que consome o dado corrigido (saldo, relatório,
+   integração) e os `CT` aprovados da mesma RN.
+
+Só depois das três o QA move o card. Você não move card.
 
 ## 4. Como o AP funciona (conhecimento apurado)
 
